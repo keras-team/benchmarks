@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "keras-benchmarks"
+version = "0.0.1"
+authors = [
+    {name = "Keras team", email = "keras-users@googlegroups.com"},
+]
+description = "Public, multi-backend end-to-end benchmarks for Keras"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development",
+]
+dependencies = []
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0",
+]
+dev = [
+    "keras-benchmarks[test]",
+    "ruff>=0.11",
+]
+
+[project.urls]
+Homepage = "https://keras.io/"
+Repository = "https://github.com/keras-team/benchmarks"
+Issues = "https://github.com/keras-team/benchmarks/issues"
+
+[tool.setuptools.packages.find]
+include = ["keras_benchmarks*"]
+
+[tool.ruff]
+line-length = 80
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle error
+    "F",  # Pyflakes
+    "I",  # isort
+    "S101",  # flake8-bandit / use of assert detected
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["E501", "F401"]
+"**/*_test.py" = ["S101"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+known-first-party = ["keras", "keras_benchmarks"]
+
+[tool.pytest.ini_options]
+addopts = "-vv"
+python_files = ["*_test.py"]
+norecursedirs = ["build", "results"]
