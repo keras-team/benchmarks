@@ -23,16 +23,23 @@ classifiers = [
     "Topic :: Scientific/Engineering",
     "Topic :: Software Development",
 ]
-dependencies = []
+dependencies = [
+    "keras>=3.0",
+]
 
 [project.optional-dependencies]
 test = [
     "pytest>=8.0",
+    "jax",
+    "scipy",
 ]
 dev = [
     "keras-benchmarks[test]",
     "ruff>=0.11",
 ]
+
+[project.scripts]
+keras-benchmarks = "keras_benchmarks.run:main"
 
 [project.urls]
 Homepage = "https://keras.io/"
